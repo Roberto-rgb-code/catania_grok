@@ -13,6 +13,7 @@ import Especiales from './views/Especiales';
 import UniformeDetalle from './views/UniformeDetalle';
 import ProductDetail from './views/ProductDetail';
 import Sidebar from './components/Sidebar';
+import EspecialDetail from './views/EspecialDetail';
 import WhatsAppWidget from './components/WhatsAppWidget'; // Asegúrate de crear este componente
 
 // Componente Layout para envolver las rutas
@@ -42,6 +43,8 @@ function App() {
           <Route path="uniforme/:id" element={<UniformeDetalle />} />
           <Route path="promocionales/product/:id" element={<ProductDetail />} />
           <Route path="sidebar" element={<Sidebar />} /> {/* Corregí "Sidebar" a minúscula por convención */}
+          <Route path="/especiales" element={<Especiales />} />
+          <Route path="/especial/:id" element={<EspecialDetail />} />  
         </Route>
       </Routes>
     </Router>

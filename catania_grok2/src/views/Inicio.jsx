@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Inicio.css';
-import UniformesIndustriales from '../assets/Uniformes-industriales.jpg';
-import ArticulosPromocionales from '../assets/Articulos-Promocionales.jpg';
-import PlayerasPolo from '../assets/ventajas-de-usar-playeras-polo-bordadas-para-uniformes.jpg';
+import UniformesIndustriales from '/assets/Uniformes-industriales.jpg';
+import ArticulosPromocionales from '/assets/Articulos-Promocionales.jpg';
+import PlayerasPolo from '/assets/ventajas-de-usar-playeras-polo-bordadas-para-uniformes.jpg';
 
 const Inicio = () => {
   return (
@@ -115,7 +115,7 @@ const Inicio = () => {
         <div className="services-grid">
           <article className="service-card">
             <img
-              src="src\assets\chaqueta.png"
+              src="\assets\chaqueta.png"
               alt="Variedad de Servicios"
               className="service-icon"
             />
@@ -126,7 +126,7 @@ const Inicio = () => {
           </article>
           <article className="service-card">
             <img
-              src="src\assets\camisa.png"
+              src="\assets\camisa.png"
               alt="Calidad y Personalización"
               className="service-icon"
             />
@@ -137,7 +137,7 @@ const Inicio = () => {
           </article>
           <article className="service-card">
             <img
-              src="src\assets\uniforme.png"
+              src="\assets\uniforme.png"
               alt="Contáctanos"
               className="service-icon"
             />
@@ -255,17 +255,17 @@ const Inicio = () => {
             </blockquote>
             <div className="testimonial-author">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/146e25d61319510705aa2dbc491c2ebdc04bed037c11cf30abebb5306b105cf2?placeholderIfAbsent=true"
+                src="\assets\umu.jpeg"
                 alt="María López"
                 className="author-image"
               />
               <div className="author-info">
                 <span className="author-name">María López</span>
-                <span className="author-title">Gerente, Salud S.A.</span>
+                <span className="author-title">Gerente, Coca Cola</span>
               </div>
               <div className="author-divider"></div>
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/1ff21555b89d20557ee9002405d534f9fca470767d14a4211ac55e27c52d0898?placeholderIfAbsent=true"
+                src="\assets\Coca-Cola-logo (1).png"
                 alt="Company Logo"
                 className="company-logo"
               />
@@ -304,17 +304,17 @@ const Inicio = () => {
             </blockquote>
             <div className="testimonial-author">
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/146e25d61319510705aa2dbc491c2ebdc04bed037c11cf30abebb5306b105cf2?placeholderIfAbsent=true"
+                src="\assets\diferencia-entre-gerente-y-director.jpg"
                 alt="Juan Pérez"
                 className="author-image"
               />
               <div className="author-info">
                 <span className="author-name">Juan Pérez</span>
-                <span className="author-title">Director, Tech Corp</span>
+                <span className="author-title">Trabajador, solfran</span>
               </div>
               <div className="author-divider"></div>
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/8d65f0578c211b4cb1dbfa995168e53e22395c0308bbb442fb34081ffa61cc44?placeholderIfAbsent=true"
+                src="\assets\solfran_color.png"
                 alt="Company Logo"
                 className="company-logo"
               />
@@ -342,7 +342,7 @@ const Inicio = () => {
         <div className="footer-content">
           <div className="footer-logo">
             <img
-              src="src\assets\Logo catania blanco.png"
+              src="\Logo catania blanco.png"
               alt="Company Logo"
               className="logo-image"
             />

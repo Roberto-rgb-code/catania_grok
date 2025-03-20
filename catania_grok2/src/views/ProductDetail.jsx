@@ -27,6 +27,7 @@ const ProductDetail = () => {
       try {
         setLoading(true);
         console.log('%c[Detail] Cargando datos de productos y stocks...', 'color: purple');
+
         const [productsData, stocksData] = await Promise.all([
           fetchProducts(),
           fetchStocks(),
@@ -77,25 +78,39 @@ const ProductDetail = () => {
 
           setProduct(mappedProduct);
 
-          // Productos relacionados: misma categoría, distinto skuPadre
+          // Función para saber si un producto comparte la misma categoría
           const sameCategory = (p) => {
             if (Array.isArray(p.categorias) && Array.isArray(foundProduct.categorias)) {
-              return p.categorias.some(c => foundProduct.categorias.includes(c));
+              return p.categorias.some((c) => foundProduct.categorias.includes(c));
             } else {
               return p.categorias === foundProduct.categorias;
             }
           };
 
-          const related = productsData
-            .filter((p) => p.skuPadre !== id && sameCategory(p))
-            .slice(0, 6)
+          // Primero filtramos productos que:
+          // 1) No sean el mismo SKU padre
+          // 2) Compartan categoría
+          const preRelated = productsData.filter(
+            (p) => p.skuPadre !== id && sameCategory(p)
+          );
+
+          // Luego los mapeamos y finalmente filtramos por stock > 0
+          const related = preRelated
             .map((p) => ({
               id: p.skuPadre,
               name: p.nombrePadre,
               imageUrl: p.imagenesPadre?.[0],
               tipo: p.hijos?.[0]?.tipo || "",
               stock: stocksMap[p.skuPadre] || 0,
-            }));
+            }))
+            .filter((rp) => rp.stock > 0)
+            .slice(0, 6);
+
+          // Logs para depurar
+          console.log("[Detail] Categorías del producto actual:", foundProduct.categorias);
+          console.log("[Detail] Productos filtrados (antes de filtrar stock):", preRelated);
+          console.log("[Detail] Productos relacionados (con stock > 0):", related);
+
           setRelatedProducts(related);
         }
       } catch (error) {
@@ -131,7 +146,7 @@ const ProductDetail = () => {
               alt={product.name}
               className="w-full h-full object-contain"
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/300x300?text=No+image';
+                e.target.src = "https://via.placeholder.com/300x300?text=No+image";
               }}
             />
           </div>
@@ -149,7 +164,7 @@ const ProductDetail = () => {
                   alt={`${product.name} ${index + 1}`}
                   className="w-full h-full object-contain"
                   onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/300x300?text=No+image';
+                    e.target.src = "https://via.placeholder.com/300x300?text=No+image";
                   }}
                 />
               </div>
@@ -203,8 +218,8 @@ const ProductDetail = () => {
             </table>
           </div>
 
-          {/* Productos relacionados */}
-          {relatedProducts.length > 0 && (
+          {/* Productos relacionados: solo los que tengan stock */}
+          {relatedProducts.length > 0 ? (
             <div className="mt-6">
               <h3 className="text-lg font-semibold mb-2">Productos relacionados</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -220,7 +235,7 @@ const ProductDetail = () => {
                         alt={rp.name}
                         className="w-full h-full object-contain"
                         onError={(e) => {
-                          e.target.src = 'https://via.placeholder.com/300x300?text=No+image';
+                          e.target.src = "https://via.placeholder.com/300x300?text=No+image";
                         }}
                       />
                     </div>
@@ -229,15 +244,19 @@ const ProductDetail = () => {
                       <p className="text-gray-600">{rp.tipo}</p>
                       <p
                         className={`text-xs ${
-                          rp.stock > 0 ? 'text-green-600' : 'text-red-600'
+                          rp.stock > 0 ? "text-green-600" : "text-red-600"
                         }`}
                       >
-                        {rp.stock > 0 ? `Stock: ${rp.stock}` : 'Sin existencias'}
+                        {rp.stock > 0 ? `Stock: ${rp.stock}` : "Sin existencias"}
                       </p>
                     </div>
                   </Link>
                 ))}
               </div>
+            </div>
+          ) : (
+            <div className="mt-6 text-sm italic text-gray-500">
+              No hay productos relacionados con existencias.
             </div>
           )}
         </div>

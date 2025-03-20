@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Productos.css';
-import UniformesIndustriales from '../assets/Uniformes-industriales.jpg';
-import ArticulosPromocionales from '../assets/Articulos-Promocionales.jpg';
-import PlayerasPolo from '../assets/ventajas-de-usar-playeras-polo-bordadas-para-uniformes.jpg';
+import UniformesIndustriales from '/assets/Uniformes-industriales.jpg';
+import ArticulosPromocionales from '/assets/Articulos-Promocionales.jpg';
+import PlayerasPolo from '/assets/ventajas-de-usar-playeras-polo-bordadas-para-uniformes.jpg';
 
 const Productos = () => {
   return (
@@ -207,7 +207,7 @@ const Productos = () => {
         <div className="footer-content">
           <div className="footer-logo">
             <img
-              src="src\assets\Logo catania blanco.png"
+              src="\Logo catania blanco.png"
               alt="Company Logo"
               className="logo-image"
             />

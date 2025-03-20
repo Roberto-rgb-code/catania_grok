@@ -1,4 +1,3 @@
-// landing-page/src/views/Uniformes.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -13,6 +12,9 @@ const Uniformes = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 24; // 6x4 = 24 productos por página
 
+  // URL base definida en el archivo de entorno (.env.production o .env)
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     fetchUniformes();
   }, []);
@@ -20,15 +22,14 @@ const Uniformes = () => {
   const fetchUniformes = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:8000/api/uniformes', {
+      const response = await axios.get(`${apiUrl}/api/uniformes`, {
         headers: {
           'Accept': 'application/json',
         },
       });
-      console.log('Respuesta de la API:', response.data); // Depuración
       const data = Array.isArray(response.data) ? response.data : (response.data.data || []);
 
-      // Organizar uniformes por categoría
+      // Organizar uniformes por categoría (según la propiedad 'categoria')
       const uniformesPorTipo = {
         Industriales: [],
         Médicos: [],
@@ -54,7 +55,6 @@ const Uniformes = () => {
     } catch (error) {
       setError('Error al obtener los uniformes: ' + error.message);
       console.error('Error al obtener los uniformes:', error.response?.data || error);
-      console.log('Respuesta completa del error:', error.response);
     } finally {
       setLoading(false);
     }
@@ -65,15 +65,15 @@ const Uniformes = () => {
     if (searchTerm) {
       filtered = uniformes.map(tipo => ({
         ...tipo,
-        productos: tipo.productos.filter(p => 
-          p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
-          p.descripcion.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        productos: tipo.productos.filter(p =>
+          p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          p.descripcion.toLowerCase().includes(searchTerm.toLowerCase()) ||
           p.tipo.toLowerCase().includes(searchTerm.toLowerCase())
         )
       })).filter(tipo => tipo.productos.length > 0);
     }
     setFilteredUniformes(filtered);
-    setCurrentPage(1); // Reinicia la paginación al buscar
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (category) => {
@@ -83,10 +83,9 @@ const Uniformes = () => {
     } else {
       setFilteredUniformes(uniformes);
     }
-    setCurrentPage(1); // Reinicia la paginación al filtrar
+    setCurrentPage(1);
   };
 
-  // Calcula los productos a mostrar según la página actual
   const getPaginatedProducts = () => {
     const allProducts = filteredUniformes.flatMap(tipo => tipo.productos);
     const startIndex = (currentPage - 1) * productsPerPage;
@@ -94,7 +93,6 @@ const Uniformes = () => {
     return allProducts.slice(startIndex, endIndex);
   };
 
-  // Calcula el número total de páginas
   const totalProducts = filteredUniformes.reduce((acc, tipo) => acc + tipo.productos.length, 0);
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
@@ -127,12 +125,12 @@ const Uniformes = () => {
       </header>
 
       <div className="uniformes-content">
-        <SidebarUniformes 
+        <SidebarUniformes
           onSearch={handleSearch}
           onFilterChange={handleFilterChange}
           categories={uniformes.map(u => u.tipo)}
         />
-        
+
         <div className="products-main">
           <div className="products-header">
             <div className="products-count">
@@ -142,10 +140,12 @@ const Uniformes = () => {
 
           <div className="uniformes-grid">
             {getPaginatedProducts().map((uniforme) => {
-              const imageSrc = uniforme.foto_path 
-                ? `http://localhost:8000/storage/${uniforme.foto_path}` 
-                : 'https://via.placeholder.com/300x300?text=No+image'; // Solo foto_path
-
+              // Si existen fotos (array), usamos la primera, sino, si existe foto_path, usamos esa; de lo contrario, placeholder.
+              const imageSrc = (uniforme.fotos && uniforme.fotos.length > 0)
+                ? `${apiUrl}/storage/${uniforme.fotos[0].foto_path}`
+                : (uniforme.foto_path 
+                    ? `${apiUrl}/storage/${uniforme.foto_path}` 
+                    : 'https://via.placeholder.com/300x300?text=No+image');
               return (
                 <Link to={`/uniforme/${uniforme.id}`} key={uniforme.id} className="uniforme-card-link">
                   <article className="uniforme-card">
@@ -155,7 +155,6 @@ const Uniformes = () => {
                       className="uniforme-image"
                       onError={(e) => {
                         e.target.src = 'https://via.placeholder.com/300x300?text=No+image';
-                        console.error('Error loading image:', e);
                       }}
                     />
                     <div className="uniforme-content">
@@ -169,7 +168,6 @@ const Uniformes = () => {
             })}
           </div>
 
-          {/* Paginación */}
           <div className="pagination">
             {Array.from({ length: totalPages }, (_, index) => (
               <button

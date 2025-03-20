@@ -31,7 +31,7 @@ const Servicios = () => {
             </div>
           </div>
           <img
-            src="src\assets\grabado laser.jpeg"
+            src="\assets\grabado laser.jpeg"
             alt="Laser service"
             className="service-image"
           />
@@ -65,7 +65,7 @@ const Servicios = () => {
             </div>
           </div>
           <img
-            src="src\assets\dtf.jpeg"
+            src="\assets\images (29)dgf.jpeg"
             alt="DTF service"
             className="service-image"
           />
@@ -111,7 +111,7 @@ const Servicios = () => {
             </ul>
           </div>
           <img
-            src="src\assets\dtf.jpeg"
+            src="\assets\subli.jpeg"
             alt="Sublimation service"
             className="service-image"
           />
@@ -159,7 +159,7 @@ const Servicios = () => {
             </div>
           </div>
           <img
-            src="src\assets\bordado-750x410.jpg"
+            src="\assets\bordado-750x410.jpg"
             alt="Embroidery service"
             className="service-image"
           />
@@ -205,7 +205,7 @@ const Servicios = () => {
             </ul>
           </div>
           <img
-            src="src\assets\serigrafia.jpeg"
+            src="\assets\serigrafia.jpeg"
             alt="Screen printing service"
             className="service-image"
           />
@@ -265,7 +265,7 @@ const Servicios = () => {
             </div>
           </div>
           <img
-            src="src\assets\tampografia.jpeg"
+            src="\assets\tampografia.jpeg"
             alt="Pad printing service"
             className="service-image"
           />
@@ -291,7 +291,7 @@ const Servicios = () => {
         <div className="footer-content">
           <div className="footer-logo">
             <img
-              src="src\assets\Logo catania blanco.png"
+              src="\Logo catania blanco.png"
               alt="Logo"
               className="footer-logo-image"
             />

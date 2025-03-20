@@ -1,7 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import './Contacto.css';
 
 const Contacto = () => {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    // Si el mapa ya existe, no lo volvemos a crear
+    if (mapRef.current) return;
+
+    // Creando icono rojo personalizado
+    const redIcon = L.icon({
+      iconUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      shadowUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-shadow.png',
+      iconSize: [25, 41], // tamaño del icono
+      iconAnchor: [12, 41], // punto del icono que se ubicará en el marcador
+    });
+
+    // Inicializamos el mapa con la nueva latitud/longitud
+    mapRef.current = L.map('map').setView([20.7044261, -103.3574619], 16);
+
+    // Capa base de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(mapRef.current);
+
+    // Agregamos el marcador rojo
+    L.marker([20.7044261, -103.3574619], { icon: redIcon })
+      .addTo(mapRef.current)
+      .bindPopup(
+        '<b>C. Francisco Márquez 1547</b><br>San Miguel de Mezquitan, Guadalajara, Jal.'
+      )
+      .openPopup();
+  }, []);
+
   return (
     <main className="main-content">
       <section className="contact-info-section">
@@ -24,8 +60,8 @@ const Contacto = () => {
               <div className="card-content">
                 <h3 className="card-title">Email</h3>
                 <p className="card-text">Escríbenos a:</p>
-                <a href="mailto:contacto@catania.com" className="card-link">
-                  contacto@catania.com
+                <a href="ventas2@catania.com.mx" className="card-link">
+                  ventas2@catania.com.mx
                 </a>
               </div>
             </article>
@@ -39,8 +75,8 @@ const Contacto = () => {
               <div className="card-content">
                 <h3 className="card-title">Teléfono</h3>
                 <p className="card-text">Llámanos al:</p>
-                <a href="tel:+34912345678" className="card-link">
-                  +34 912 345 678
+                <a href="tel:+523338533555" className="card-link">
+                  +52 333 853 3555
                 </a>
               </div>
             </article>
@@ -53,18 +89,18 @@ const Contacto = () => {
               />
               <div className="card-content">
                 <h3 className="card-title">Oficina</h3>
-                <p className="card-text">Calle Ejemplo 123, Madrid, España</p>
+                <p className="card-text">
+                  C. Francisco Márquez 1547, San Miguel de Mezquitan, 44260
+                  Guadalajara, Jal., México
+                </p>
                 <a href="#" className="link-with-arrow">
                   Obtener Direcciones
                 </a>
               </div>
             </article>
           </div>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/9db2df93a2653a23568b8c141e73ab4da3446054b56a3906d286f8b26928b8ba?placeholderIfAbsent=true"
-            alt="Contact illustration"
-            className="contact-image"
-          />
+          {/* Sección del mapa */}
+          <div id="map" style={{ height: '400px', width: '100%' }}></div>
         </div>
       </section>
 
@@ -177,27 +213,27 @@ const Contacto = () => {
           </h2>
           <div className="partners-logos">
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/98c82e8268c5b89aa188185253fb8140bb9264c1fc1671111bcbf0abf8c162c9?placeholderIfAbsent=true"
+              src="\assets\Coca-Cola-logo (1).png"
               alt="Partner logo"
               className="partner-logo"
             />
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/e2bb1e2a565532432ea6c0b40cb82174844c6fa38aa92f78ec120c8a06789638?placeholderIfAbsent=true"
+              src="\assets\solfran_color.png"
               alt="Partner logo"
               className="partner-logo"
             />
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/2d943c87bc3675ee2ccd3ae6bc8b57ad5bb219d2014aa6e351de76e359f222b3?placeholderIfAbsent=true"
+              src="\assets\logo_udeg_color_horizontal_3.png"
               alt="Partner logo"
               className="partner-logo"
             />
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/c5249c80b0c5ce72bddf7a7240f6f723cb51187431cc0bd76dc81bad8b745e20?placeholderIfAbsent=true"
+              src="\assets\dddddd.png"
               alt="Partner logo"
               className="partner-logo"
             />
             <img
-              src="https://cdn.builder.io/api/v1/image/assets/19212d5c728649939294929a3b45f164/c42b66f92eab4565a74c662a67f1ef914af79388022450a580f958a4737734e5?placeholderIfAbsent=true"
+              src="\assets\images (29).jpeg"
               alt="Partner logo"
               className="partner-logo"
             />
@@ -209,7 +245,8 @@ const Contacto = () => {
         <header className="section-header">
           <h2 className="section-title">FAQs</h2>
           <p className="section-description">
-            Aquí encontrarás las respuestas a las preguntas más frecuentes sobre nuestros servicios.
+            Aquí encontrarás las respuestas a las preguntas más frecuentes sobre
+            nuestros servicios.
           </p>
         </header>
 
@@ -224,7 +261,9 @@ const Contacto = () => {
               />
             </summary>
             <p className="faq-answer">
-              Nuestros horarios de atención son de lunes a viernes, de 9:00 a 18:00 horas. Los sábados atendemos de 10:00 a 14:00 horas. Estamos cerrados los domingos.
+              Nuestros horarios de atención son de lunes a viernes, de 9:00 a
+              18:00 horas. Los sábados atendemos de 10:00 a 14:00 horas. Estamos
+              cerrados los domingos.
             </p>
           </details>
 
@@ -238,7 +277,9 @@ const Contacto = () => {
               />
             </summary>
             <p className="faq-answer">
-              Estamos ubicados en la Calle Principal 123, Ciudad. Puedes encontrarnos fácilmente cerca del parque central. Consulta nuestro mapa para más detalles.
+              Estamos ubicados en la Calle Principal 123, Ciudad. Puedes
+              encontrarnos fácilmente cerca del parque central. Consulta nuestro
+              mapa para más detalles.
             </p>
           </details>
 
@@ -252,7 +293,9 @@ const Contacto = () => {
               />
             </summary>
             <p className="faq-answer">
-              Puedes contactarnos a través de nuestro formulario en línea o llamándonos al 123-456-7890. También puedes enviarnos un correo a info@catania.com. Estamos aquí para ayudarte.
+              Puedes contactarnos a través de nuestro formulario en línea o
+              llamándonos al 123-456-7890. También puedes enviarnos un correo a
+              info@catania.com. Estamos aquí para ayudarte.
             </p>
           </details>
 
@@ -266,7 +309,10 @@ const Contacto = () => {
               />
             </summary>
             <p className="faq-answer">
-              Sí, ofrecemos servicio a domicilio para pedidos mayores a un monto específico. Asegúrate de consultar las condiciones en nuestra sección de servicios. Estamos comprometidos a facilitarte la experiencia.
+              Sí, ofrecemos servicio a domicilio para pedidos mayores a un monto
+              específico. Asegúrate de consultar las condiciones en nuestra
+              sección de servicios. Estamos comprometidos a facilitarte la
+              experiencia.
             </p>
           </details>
 
@@ -280,9 +326,11 @@ const Contacto = () => {
               />
             </summary>
             <p className="faq-answer">
-              Por supuesto, ofrecemos opciones de personalización para todos nuestros productos. Puedes elegir colores, diseños y más. Contáctanos para discutir tus necesidades específicas.
+              Por supuesto, ofrecemos opciones de personalización para todos
+              nuestros productos. Puedes elegir colores, diseños y más.
+              Contáctanos para discutir tus necesidades específicas.
             </p>
-          </details>  
+          </details>
         </div>
 
         <div className="faq-cta">

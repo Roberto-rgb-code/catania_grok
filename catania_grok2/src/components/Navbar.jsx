@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="container">
         <div className="logo-wrapper">
           <img
-            src="src\assets\Logo catania blanco.png"
+            src="/Logo catania blanco.png"
             alt="Company Logo"
             className="logo-image"
           />
@@ -22,8 +22,16 @@ const Navbar = () => {
             <Link to="/contacto" className="nav-link">Contacto</Link>
           </div>
           <div className="nav-actions">
-            <button className="btn btn-secondary-small">Enviar</button>
-            <button className="btn btn-primary-small">Cotizar</button>
+          <a
+           href="mailto:ventas2@catania.com.mx?subject=Solicitud%20de%20información&body=Hola,%20quisiera%20saber%20..."
+          >
+          <button className="btn btn-secondary-small">Enviar</button>
+          </a>
+
+          <a href="tel:+523338533555">
+          <button className="btn btn-primary-small">Cotizar</button>
+          </a>
+
           </div>
         </div>
       </div>

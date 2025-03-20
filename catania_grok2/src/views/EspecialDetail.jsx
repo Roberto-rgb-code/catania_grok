@@ -1,35 +1,35 @@
+// landing-page/src/views/EspecialDetail.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './UniformeDetalle.css';
+import './EspecialDetail.css';
 
-const UniformeDetalle = () => {
+const EspecialDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [uniforme, setUniforme] = useState(null);
+  const [especial, setEspecial] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // Índice de la foto seleccionada en la galería
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  // URL base definida en el entorno
-  const apiUrl = import.meta.env.VITE_API_URL;
+  // URL base definida en el entorno para el backend de especiales
+  const apiUrl = import.meta.env.VITE_ESPECIALES_API_URL;
 
   useEffect(() => {
-    fetchUniforme();
+    fetchEspecial();
   }, [id]);
 
-  const fetchUniforme = async () => {
+  const fetchEspecial = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${apiUrl}/api/uniformes/${id}`, {
+      const response = await axios.get(`${apiUrl}/api/especiales/${id}`, {
         headers: { 'Accept': 'application/json' },
       });
       const data = response.data;
-      setUniforme(data);
+      setEspecial(data);
     } catch (error) {
-      setError('Error al obtener el uniforme: ' + error.message);
-      console.error('Error en fetchUniforme:', error);
+      setError('Error al obtener el especial: ' + error.message);
+      console.error('Error en fetchEspecial:', error);
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,7 @@ const UniformeDetalle = () => {
 
   if (loading) {
     return (
-      <div className="uniforme-detalle-container">
+      <div className="especial-detalle-container">
         <p>Cargando...</p>
       </div>
     );
@@ -45,20 +45,20 @@ const UniformeDetalle = () => {
 
   if (error) {
     return (
-      <div className="uniforme-detalle-container error">
+      <div className="especial-detalle-container error">
         <p>{error}</p>
-        <button className="btn" onClick={() => navigate('/uniformes')}>
+        <button className="btn" onClick={() => navigate('/especiales')}>
           Volver al catálogo
         </button>
       </div>
     );
   }
 
-  if (!uniforme) {
+  if (!especial) {
     return (
-      <div className="uniforme-detalle-container error">
-        <p>Uniforme no encontrado</p>
-        <button className="btn" onClick={() => navigate('/uniformes')}>
+      <div className="especial-detalle-container error">
+        <p>Especial no encontrado</p>
+        <button className="btn" onClick={() => navigate('/especiales')}>
           Volver al catálogo
         </button>
       </div>
@@ -66,18 +66,18 @@ const UniformeDetalle = () => {
   }
 
   // Si no existe un arreglo de fotos, usamos el campo foto_path
-  const fotos = (uniforme.fotos && uniforme.fotos.length > 0)
-    ? uniforme.fotos
-    : (uniforme.foto_path ? [{ foto_path: uniforme.foto_path }] : []);
+  const fotos = (especial.fotos && especial.fotos.length > 0)
+    ? especial.fotos
+    : (especial.foto_path ? [{ foto_path: especial.foto_path }] : []);
 
   return (
-    <div className="uniforme-detalle-container">
+    <div className="especial-detalle-container">
       <header className="section-header">
-        <span className="section-tag">Uniformes</span>
-        <h1 className="section-title">Detalles del Uniforme</h1>
+        <span className="section-tag">Especiales</span>
+        <h1 className="section-title">Detalles del Producto Especial</h1>
       </header>
 
-      <div className="uniforme-detail-content">
+      <div className="especial-detail-content">
         <div className="gallery">
           {fotos.length > 1 && (
             <div className="thumbnails">
@@ -96,7 +96,7 @@ const UniformeDetalle = () => {
             {fotos.length > 0 ? (
               <img
                 src={`${apiUrl}/storage/${fotos[selectedIndex].foto_path}`}
-                alt={uniforme.nombre}
+                alt={especial.nombre}
                 className="main-image"
               />
             ) : (
@@ -104,12 +104,11 @@ const UniformeDetalle = () => {
             )}
           </div>
         </div>
-        <div className="uniforme-info">
-          <h2 className="product-name">{uniforme.nombre}</h2>
-          <p className="product-description">{uniforme.descripcion}</p>
-          <p className="product-category">Categoría: {uniforme.categoria}</p>
-          <p className="product-type">Tipo: {uniforme.tipo}</p>
-          <button className="btn" onClick={() => navigate('/uniformes')}>
+        <div className="especial-info">
+          <h2 className="product-name">{especial.nombre}</h2>
+          <p className="product-description">{especial.descripcion}</p>
+          <p className="product-category">Categoría: {especial.categoria}</p>
+          <button className="btn" onClick={() => navigate('/especiales')}>
             Volver al catálogo
           </button>
         </div>
@@ -118,4 +117,4 @@ const UniformeDetalle = () => {
   );
 };
 
-export default UniformeDetalle;
+export default EspecialDetail;

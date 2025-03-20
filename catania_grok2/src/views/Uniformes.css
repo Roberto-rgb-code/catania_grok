@@ -1,357 +1,142 @@
-/* landing-page/src/views/Uniformes.css */
-
 /* Contenedor principal de la vista Uniformes */
 .uniformes-container {
-    padding: 112px 64px;
-    background-color: #fff;
-    max-width: 1200px;
-    margin: 0 auto;
+  padding: 112px 64px;
+  background-color: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Ajustamos el grid para ser más responsivo */
+.uniformes-grid {
+  /* Usamos auto-fit o auto-fill con minmax para lograr una cuadrícula flexible */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 40px; /* Ajusta si deseas más o menos espacio */
+}
+
+/* Tarjeta de cada uniforme en el catálogo */
+.uniforme-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.uniforme-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Imagen del uniforme */
+.uniforme-image {
+  width: 100%;
+  height: 250px; /* Ajusta la altura según tu preferencia */
+  object-fit: cover;
+}
+
+/* Contenido de la tarjeta (título, categoría) */
+.uniforme-content {
+  padding: 16px;
+  text-align: center;
+}
+
+.uniforme-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.uniforme-category {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-bottom: 8px;
+}
+
+.uniforme-type {
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+/* Ajustes para la sección contenedora: sidebar + productos */
+.uniformes-content {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.products-main {
+  flex: 1;
+}
+
+.products-header {
+  margin-bottom: 20px;
+}
+
+.products-count {
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  padding: 8px 16px;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #2c3e50;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #e67e22;
+  color: #fff;
+  border-color: #e67e22;
+}
+
+.pagination-button.active {
+  background-color: #d35400;
+  color: #fff;
+  border-color: #d35400;
+}
+
+/* Responsividad (puedes ajustar breakpoints a tu gusto) */
+@media (max-width: 991px) {
+  .uniformes-container {
+    padding: 80px 20px;
   }
-  
-  /* Contenedor del detalle de uniforme */
-  .uniforme-detalle-container {
-    padding: 112px 64px;
-    background-color: #fff;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Encabezado de las secciones (Uniformes y Detalle) */
-  .section-header,
-  .detalle-header {
-    text-align: center;
-    max-width: 768px;
-    margin: 0 auto 40px;
-  }
-  
-  /* Etiqueta de sección (ej. "Uniformes") */
-  .section-tag {
-    font-size: 16px;
-    font-weight: 600;
-    color: #e67e22;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  /* Títulos principales de las secciones */
-  .section-title,
-  .detalle-title {
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 58px;
-    margin-top: 16px;
-    color: #2c3e50;
-    animation: slideInUp 1s ease-out;
-  }
-  
-  /* Descripción de las secciones */
-  .section-description {
-    font-size: 18px;
-    line-height: 27px;
-    margin-top: 24px;
-    color: #7f8c8d;
-  }
-  
-  /* Grid de uniformes en el catálogo - Ajustado para 6 columnas en pantallas grandes */
-  .uniformes-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr)); /* 6 columnas para 24 productos por página */
-    gap: 48px;
-    margin-top: 80px;
-  }
-  
-  /* Tarjeta de cada uniforme en el catálogo */
-  .uniforme-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-  
-  /* Efecto hover de la tarjeta */
-  .uniforme-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  /* Enlace de la tarjeta (mantén el estilo para evitar decoración) */
-  .uniforme-card-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  /* Imagen del uniforme */
+
+  /* El grid se ajustará automáticamente por el auto-fill */
   .uniforme-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: 200px;
   }
-  
-  /* Placeholder para imágenes no disponibles */
-  .uniforme-image.placeholder {
-    width: 100%;
-    height: 300px;
-    background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #7f8c8d;
-    font-size: 14px;
-  }
-  
-  /* Contenido de la tarjeta (título, categoría) */
-  .uniforme-content {
-    padding: 20px;
-    text-align: center;
-  }
-  
-  /* Título del uniforme */
-  .uniforme-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 10px;
-  }
-  
-  /* Categoría del uniforme */
-  .uniforme-category {
-    font-size: 16px;
-    color: #7f8c8d;
-    margin-bottom: 10px;
-  }
-  
-  /* Contenedor principal del contenido de uniformes con sidebar */
+
   .uniformes-content {
-    display: flex;
-    gap: 40px;
-    margin-top: 40px;
+    flex-direction: column;
   }
-  
-  /* Sección para el catálogo principal (productos) */
-  .products-main {
-    flex: 1; /* Ocupa el espacio restante al lado del sidebar */
-  }
-  
-  /* Encabezado del catálogo (contador de productos) */
-  .products-header {
-    margin-bottom: 20px;
-  }
-  
-  .products-count {
-    font-size: 16px;
-    color: #7f8c8d;
-  }
-  
-  /* Contenedor del sidebar */
   .sidebar-uniformes {
-    width: 300px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    border: 1px solid #e9ecef;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
     margin-bottom: 20px;
   }
-  
-  /* Título del sidebar */
-  .sidebar-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .uniforme-image {
+    height: 180px;
   }
-  
-  /* Contenedor de búsqueda en el sidebar */
-  .search-container {
-    margin-bottom: 20px;
-  }
-  
-  /* Input de búsqueda */
-  .search-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #2c3e50;
-  }
-  
-  /* Contenedor de filtros en el sidebar */
-  .filter-container {
-    margin-bottom: 20px;
-  }
-  
-  /* Selector de categorías */
-  .filter-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #2c3e50;
-    background-color: #fff;
-  }
-  
-  /* Estilos para el detalle del uniforme */
-  .detalle-content {
-    display: flex;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 0;
-  }
-  
-  /* Imagen en el detalle */
-  .detalle-image {
-    flex: 1;
-    max-width: 500px;
-  }
-  
-  .detalle-image-large {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Placeholder para imágenes no disponibles en el detalle */
-  .detalle-image.placeholder {
-    width: 100%;
-    height: 400px;
-    background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #7f8c8d;
-    font-size: 14px;
-    border-radius: 10px;
-  }
-  
-  /* Información en el detalle */
-  .detalle-info {
-    flex: 1;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .detalle-description,
-  .detalle-category {
+
+  .uniforme-title {
     font-size: 18px;
-    line-height: 24px;
-    color: #2c3e50;
-    margin-bottom: 15px;
   }
-  
-  /* Enlace para volver a Inicio */
-  .back-link {
-    display: block;
-    margin-top: 20px;
-    text-align: center;
-    color: #e67e22;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
-  }
-  
-  .back-link:hover {
-    color: #d35400;
-  }
-  
-  /* Mensajes de carga, error, o sin uniformes */
-  .loading-message,
-  .no-uniformes,
-  .error-message {
-    text-align: center;
-    font-size: 18px;
-    color: #7f8c8d;
-    margin-top: 40px;
-  }
-  
-  /* Botones de paginación */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .pagination-button {
-    padding: 8px 16px;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #2c3e50;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .pagination-button:hover {
-    background-color: #e67e22;
-    color: #fff;
-    border-color: #e67e22;
-  }
-  
-  .pagination-button.active {
-    background-color: #d35400;
-    color: #fff;
-    border-color: #d35400;
-  }
-  
-  /* Animaciones */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  /* Media Queries para responsive design */
-  @media (max-width: 991px) {
-    .uniformes-container,
-    .uniforme-detalle-container {
-      padding: 80px 20px;
-    }
-  
-    .uniformes-grid {
-      margin-top: 40px;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
-  
-    .section-title,
-    .detalle-title {
-      font-size: 40px;
-      line-height: 54px;
-    }
-  
-    .detalle-content {
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .detalle-image,
-    .detalle-info {
-      max-width: 100%;
-    }
-  
-    .uniformes-content {
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .sidebar-uniformes {
-      width: 100%;
-    }
-  
-    .uniforme-image,
-    .detalle-image-large,
-    .detalle-image.placeholder {
-      height: 200px;
-    }
-  }
+}

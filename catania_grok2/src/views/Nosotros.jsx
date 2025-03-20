@@ -4,9 +4,9 @@ import './Nosotros.css';
 // Componente interno para el carrusel de la sección "history"
 const HistoryCarousel = () => {
   const images = [
-    "src/assets/Captura de pantalla 2025-03-03 154932.png",
-    "src/assets/Captura de pantalla 2025-03-03 154943.png", // Reemplaza con la ruta de la segunda imagen
-    "src/assets/Captura de pantalla 2025-03-03 154958.png"  // Reemplaza con la ruta de la tercera imagen
+    "/assets/Captura de pantalla 2025-03-03 154932.png",
+    "/assets/Captura de pantalla 2025-03-03 154943.png", // Reemplaza con la ruta de la segunda imagen
+    "/assets/Captura de pantalla 2025-03-03 154958.png"  // Reemplaza con la ruta de la tercera imagen
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -256,7 +256,7 @@ const Nosotros = () => {
         <div className="footer-content">
           <div className="footer-logo">
             <img
-              src="src\assets\Logo catania blanco.png"
+              src="/Logo catania blanco.png"
               alt="Company Logo"
               className="logo-image"
             />
