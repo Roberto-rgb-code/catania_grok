@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SidebarEspeciales from '../components/SidebarEspeciales';
 import './Especiales.css';
+import Promocionales from './Promocionales';
 
 const Especiales = () => {
   const [especiales, setEspeciales] = useState([]);
@@ -31,9 +32,9 @@ const Especiales = () => {
 
       // Organizar especiales por categoría
       const especialesPorCategoria = {
-        Ropa: [],
-        Accesorios: [],
-        Equipo: [],
+        Textil: [],
+        Promocional: [],
+        Otros: [],
       };
 
       data.forEach(especial => {
