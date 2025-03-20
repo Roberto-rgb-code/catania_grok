@@ -43,9 +43,9 @@ const Especiales = () => {
       });
 
       const categoriasEspeciales = [
-        { tipo: 'Ropa', productos: especialesPorCategoria.Ropa },
-        { tipo: 'Accesorios', productos: especialesPorCategoria.Accesorios },
-        { tipo: 'Equipo', productos: especialesPorCategoria.Equipo },
+        { tipo: 'Textil', productos: especialesPorCategoria.Ropa },
+        { tipo: 'Promocional', productos: especialesPorCategoria.Accesorios },
+        { tipo: 'Otros', productos: especialesPorCategoria.Equipo },
       ].filter(tipo => tipo.productos.length > 0);
 
       setEspeciales(categoriasEspeciales);
